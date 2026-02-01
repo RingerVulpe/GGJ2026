@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33e4acd6146eca4784f73248f2c4195, type: 3}
+  m_Name: Client_4
+  m_EditorClassIdentifier: Assembly-CSharp::ClientDefinitionSO
+  id: C4
+  displayName: Name
+  portraitSprite: {fileID: 8447392308922861121, guid: f1ac5bceac725ef4994c129834a7e6b2, type: 3}
+  requestText: 'Dahling! I desire, nay, I require nothing less than the most faaaaahbulous
+    Face from you tonight, on this most auspicious of days!
+
+
+    You''ve no doubt
+    recognized me, of course? Yes yes, it is I, the stunning silver starlet of your
+    dreams made manifest! I''ve quite the performance to put on tonight, and a couple
+    of FOOLS to put in place. They say my star dims, but I will show them a new dazzling
+    display, that will forever make me untouchable! Unreproachable! DIVINE!!!'
+  requestedMask: {fileID: 11400000, guid: f735428ca0a070846ab63e352edc6c02, type: 2}
+  responseIncorrect: 'Travesty! Dismay! WOE! How shall my star ever regain it''s
+    brilliance with such an ill-fitting Face!!
+
+
+    And yet, the stage! The stage!
+    She calls for me! Hear her song! The show must go on, and so too does your lineup!
+    Hark, here comes your final performance! Adieu, my dahling Facelitator! ADIEU!'
+  responsePartial: 'A Face fit for the stars you''ve bestowed upon me! My performance
+    will elevate this stunning, yet imperfect visage to heights higher than it has
+    dared dreamed. We shall rise! Rise together unto the heavens! RISE!
+
+
+    And
+    yet, the stage! The stage! She calls for me! Hear her song! The show must go
+    on, and so too does your lineup! Hark, here comes your final performance! Adieu,
+    my dahling Facelitator! ADIEU!'
+  responseCorrect: 'Daaahling!! What an EXQUISITE visage you have bestowed upon me!
+    Such beauty! Such poise! Such DIVINITY!!! My star shall shine to the heavens
+    and yet reach further beyond and unto eternity!
+
+
+    And yet, the stage! The
+    stage! She calls for me! Hear her song! The show must go on, and so too does
+    your lineup! Hark, here comes your final performance! Adieu, my dahling Facelitator!
+    ADIEU!'

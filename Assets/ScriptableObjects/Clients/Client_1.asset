@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33e4acd6146eca4784f73248f2c4195, type: 3}
+  m_Name: Client_1
+  m_EditorClassIdentifier: Assembly-CSharp::ClientDefinitionSO
+  id: C1
+  displayName: Name
+  portraitSprite: {fileID: 8447392308922861121, guid: f1ac5bceac725ef4994c129834a7e6b2, type: 3}
+  requestText: "Hey Faceilitator! Thanks for taking over for me, I hope you are up
+    to the challenge! Don't worry, my request is going to be super easy, I know exactly
+    what I'm looking for. \n\nThink of this as a test! Remember to check your Book
+    of Faces and you'll find exactly what I'm looking for.\n\nThis year I want to
+    make a lot of new friends. I want others to know that I'm very outgoing and up
+    for all kinds of new adventures. Should be pretty easy to find a Face that fits
+    exactly what I want others to see!"
+  requestedMask: {fileID: 11400000, guid: 119745c343c71454b90228ed9fe5c679, type: 2}
+  responseIncorrect: 'Ohhh...well it''s a lovely Face, but it''s not quite what I
+    was looking for. I''m not sure others would be able to see the real me.
+
+
+    You''ve
+    got quite a line building outside, but hang in there! I''m sure so long as you
+    get familiar with your Book of Faces you''ll find the perfect fit for everyone.
+    Good luck!'
+  responsePartial: 'Nice! Not exactly what I was looking for but this should still
+    do nicely, thank you! This will really help others get a sense of who I am.
+
+
+    You''ve
+    got quite a line building outside, but hang in there! I''m sure so long as you
+    get familiar with your Book of Faces you''ll find the perfect fit for everyone.
+    Good luck!'
+  responseCorrect: 'Whoa!! What a perfect Face, you really know what you''re doing!
+    It''s like you really understand who I am. I''m going to make so many friends
+    with Face like this!
+
+
+    You''ve got quite a line building outside, but hang
+    in there! I''m sure so long as you get familiar with your Book of Faces you''ll
+    find the perfect fit for everyone. Good luck!'

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33e4acd6146eca4784f73248f2c4195, type: 3}
+  m_Name: Client_3
+  m_EditorClassIdentifier: Assembly-CSharp::ClientDefinitionSO
+  id: C3
+  displayName: Name
+  portraitSprite: {fileID: -1979181424647811347, guid: 84c1378b79e64534cb70264055229d5b, type: 3}
+  requestText: 'Hi there... um... It''s my first time here at the festival... I really
+    hope you can help me find a good face...
+
+
+    I guess I''m still really trying
+    to figure out who I am, so I don''t really know what I can tell you about myself.
+    Since it''s my first time, I think I just want to watch others here and really
+    spend some time this year just trying to discover myself and who I want to be.
+    I''m really sorry that''s not a lot to go on!'
+  requestedMask: {fileID: 11400000, guid: d2128f21dcc17f643bfb79f2d1be2cb5, type: 2}
+  responseIncorrect: 'A-are you sure? This doesn''t feel right to me... are people
+    going to get the wrong impression of me?
+
+
+    Oh, guess I better get going before
+    I miss the festival. I don''t want to keep your line waiting, looks like you
+    still have a couple more to go. Good luck Faceilitator!'
+  responsePartial: "Oh thank you, I'm still a little nervous but... I think this
+    face will be helpful, even if I don't feel 100% comfortable in it yet. \n\nOh,
+    guess I better get going before I miss the festival. I don't want to keep your
+    line waiting, looks like you still have a couple more to go. Good luck Faceilitator!"
+  responseCorrect: 'Ohh. Ooooh wow... this feels really right for me! I don''t know
+    how you did it, but this face really feels like it captures the essence of where
+    I am in life... I feel so much more comfortable now. Thank you so much!
+
+
+    Oh,
+    guess I better get going before I miss the festival. I don''t want to keep your
+    line waiting, looks like you still have a couple more to go. Good luck Faceilitator!'

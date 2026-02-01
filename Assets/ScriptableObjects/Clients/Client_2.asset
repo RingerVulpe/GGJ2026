@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33e4acd6146eca4784f73248f2c4195, type: 3}
+  m_Name: Client_2
+  m_EditorClassIdentifier: Assembly-CSharp::ClientDefinitionSO
+  id: C2
+  displayName: Name
+  portraitSprite: {fileID: 5075553010557511337, guid: 41818a71ac82ce84dbd758dbe35f813f, type: 3}
+  requestText: 'Greetings Faceilitator, let us get underway. I must meet with my
+    family before the festivities commence.
+
+
+    I have worked really hard to get
+    where I''m at, and content with my lot in life. My Face should reflect that,
+    and grant me the strength this year to maintain all that I''ve worked for. As
+    you have no doubt deduced, I am not very social. I rather just spend time with
+    my family, so if you could keep that in mind that would be great.  '
+  requestedMask: {fileID: 11400000, guid: 517c527a226ae4541bf796144e55ca6b, type: 2}
+  responseIncorrect: '...No. No I don''t believe this is it at all unfortunately.
+    But, this will be another challenge I shall conquer and endure.
+
+
+    I bid you
+    a good day, and hope you find your own strength to help the others lined up outside.'
+  responsePartial: 'Hmmn. Yes this will be fine. Not perfect, but good enough.
+
+
+    I
+    bid you a good day, and hope you find your own strength to help the others lined
+    up outside.'
+  responseCorrect: 'Yes. Yes this is it. I can feel the strength from this face.
+    Stoic, but fierce. It''s perfect.
+
+
+    I bid you a good day, and hope you find
+    your own strength to help the others lined up outside.'

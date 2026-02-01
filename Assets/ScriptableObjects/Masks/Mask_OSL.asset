@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a5cce7876a61ae4d98fbd48268464de, type: 3}
+  m_Name: Mask_OSL
+  m_EditorClassIdentifier: Assembly-CSharp::MaskDefinitionSO
+  id: 100
+  displayName: OSL
+  style: {fileID: 11400000, guid: c8398614a1645d840b2b8668f6ae5028, type: 2}
+  color: {fileID: 11400000, guid: 5fe4adc5c7dba1f4c98d6ede3be2e6aa, type: 2}
+  shape: {fileID: 11400000, guid: 9b3fb6e311c3df6439f76e24397e9ddc, type: 2}
+  icon: {fileID: 21300000, guid: 8383cf19b0ac3b0479a9c3c973ca9284, type: 3}

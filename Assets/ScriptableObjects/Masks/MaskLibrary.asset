@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9601f535dc027f248966bab2dd9893c0, type: 3}
+  m_Name: MaskLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::MaskLibrarySO
+  masks:
+  - {fileID: 11400000, guid: 3aee36056ac93164495c799bbc9a95bf, type: 2}
+  - {fileID: 11400000, guid: f735428ca0a070846ab63e352edc6c02, type: 2}
+  - {fileID: 11400000, guid: 119745c343c71454b90228ed9fe5c679, type: 2}
+  - {fileID: 11400000, guid: d2128f21dcc17f643bfb79f2d1be2cb5, type: 2}
+  - {fileID: 11400000, guid: b1559d77262e87041bb77957dcef01f9, type: 2}
+  - {fileID: 11400000, guid: 517c527a226ae4541bf796144e55ca6b, type: 2}
+  - {fileID: 11400000, guid: 54ec023bb95774445a308732b2fe5d9c, type: 2}
+  - {fileID: 11400000, guid: c58004912d6afb340ace1f70af284821, type: 2}
