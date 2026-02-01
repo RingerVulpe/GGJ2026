@@ -10,6 +10,7 @@ public class AudioLibrary : MonoBehaviour
 
     [Header("UI SFX")]
     public AudioClip click;
+    public AudioClip bookWoosh;
 
     [Header("Client SFX")]
     public AudioClip clientArrive;

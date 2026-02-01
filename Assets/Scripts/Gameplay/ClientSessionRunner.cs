@@ -67,9 +67,9 @@ public class ClientSessionRunner : MonoBehaviour
     [SerializeField] private bool _log;
 
     private int _clientIndex;
-
     private ClientView _currentClientView;
     private Coroutine _moveRoutine;
+    private Coroutine _exitVoRoutine;
 
     private bool _isWaitingForProceed;
     private bool _isClientInPosition;
@@ -136,8 +136,15 @@ public class ClientSessionRunner : MonoBehaviour
         _sessionStartTime = 0f;
         _clientStartTime = 0f;
 
+        if (_exitVoRoutine != null)
+        {
+            StopCoroutine(_exitVoRoutine);
+            _exitVoRoutine = null;
+        }
+
         DespawnCurrentClient();
     }
+
 
     public void BeginCurrentClient()
     {
@@ -154,18 +161,19 @@ public class ClientSessionRunner : MonoBehaviour
         _isClientInPosition = false;
         _hasSubmittedForCurrentClient = false;
 
+        CancelQueuedExitVo();
+
         SpawnCurrentClient();
+
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClientArrive();
 
         SlideClientTo(_centerPos, onArrived: () =>
         {
             _isClientInPosition = true;
             _clientStartTime = Time.time; // timer starts when client arrives
 
-            // SFX: arrive whoosh
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.PlayClientArrive();
-
-            // VO: request line
+            // VO: request line (keep this on arrival so it's not stepping on the whoosh)
             var c = GetCurrentClient();
             if (c != null && AudioManager.Instance != null)
                 AudioManager.Instance.PlayClientRequest(c.requestVo);
@@ -173,6 +181,8 @@ public class ClientSessionRunner : MonoBehaviour
 
         clientShown?.Invoke(GetCurrentClient());
     }
+
+
 
     public string SubmitMask(MaskDefinitionSO chosenMask, out int matchCount)
     {
@@ -202,18 +212,23 @@ public class ClientSessionRunner : MonoBehaviour
         _finalScore += matchCount;
         _clientsServed++;
 
+        // VO: response, then exit immediately after response finishes (NOT when client leaves)
+        AudioClip responseClip = null;
+
+        if (matchCount <= 0)
+            responseClip = client.responseIncorrectVo;
+        else if (matchCount == 1)
+            responseClip = client.responsePartialVo;
+        else
+            responseClip = client.responseCorrectVo;
+
         if (AudioManager.Instance != null)
         {
-            AudioClip responseClip = null;
-
-            if (matchCount <= 0)
-                responseClip = client.responseIncorrectVo;
-            else if (matchCount == 1)
-                responseClip = client.responsePartialVo;
-            else
-                responseClip = client.responseCorrectVo;
-
             AudioManager.Instance.PlayClientResponse(responseClip);
+
+            CancelQueuedExitVo();
+
+            QueueExitVoAfterResponse(responseClip, client.exitVo);
         }
 
         clientResponded?.Invoke(response, matchCount);
@@ -224,6 +239,43 @@ public class ClientSessionRunner : MonoBehaviour
         return response;
     }
 
+    private void QueueExitVoAfterResponse(AudioClip responseClip, AudioClip exitClip)
+    {
+        if (_exitVoRoutine != null)
+        {
+            StopCoroutine(_exitVoRoutine);
+            _exitVoRoutine = null;
+        }
+
+        if (exitClip == null)
+            return;
+
+        float delay = 0f;
+
+        // If there was a response clip, wait for it to finish.
+        // Small bias so it feels immediate.
+        if (responseClip != null)
+            delay = Mathf.Max(0f, responseClip.length - 0.02f);
+
+        _exitVoRoutine = StartCoroutine(CoPlayExitVoAfterDelay(delay, exitClip));
+    }
+
+    private IEnumerator CoPlayExitVoAfterDelay(float delay, AudioClip exitClip)
+    {
+        float t = 0f;
+
+        // Unscaled so it still behaves correctly if timeScale changes
+        while (t < delay)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClientExit(exitClip);
+
+        _exitVoRoutine = null;
+    }
     public void ProceedToNextClient()
     {
         if (!_isWaitingForProceed)
@@ -231,15 +283,10 @@ public class ClientSessionRunner : MonoBehaviour
 
         _isWaitingForProceed = false;
 
-        // VO: exit line + SFX leave whoosh (triggered when leaving starts)
-        var client = GetCurrentClient();
-        if (client != null && AudioManager.Instance != null)
-            AudioManager.Instance.PlayClientExit(client.exitVo);
-
+        // SFX: leave whoosh begins as soon as current client starts sliding out
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlayClientLeave();
 
-        // Slide out current client, then advance and bring the next one in.
         if (_currentClientView != null)
         {
             SlideClientTo(_exitSlidePos, onArrived: () =>
@@ -253,6 +300,7 @@ public class ClientSessionRunner : MonoBehaviour
             AdvanceAndBeginNextClient();
         }
     }
+
 
     #endregion
 
@@ -337,12 +385,19 @@ public class ClientSessionRunner : MonoBehaviour
             _moveRoutine = null;
         }
 
+        if (_exitVoRoutine != null)
+        {
+            StopCoroutine(_exitVoRoutine);
+            _exitVoRoutine = null;
+        }
+
         if (_currentClientView != null)
         {
             Destroy(_currentClientView.gameObject);
             _currentClientView = null;
         }
     }
+
 
     private void SlideClientTo(RectTransform target, Action onArrived)
     {
@@ -461,7 +516,14 @@ public class ClientSessionRunner : MonoBehaviour
         _moveRoutine = null;
         onArrived?.Invoke();
     }
-
+    private void CancelQueuedExitVo()
+    {
+        if (_exitVoRoutine != null)
+        {
+            StopCoroutine(_exitVoRoutine);
+            _exitVoRoutine = null;
+        }
+    }
     private IEnumerator ReturnScaleToOne(RectTransform clientRect)
     {
         Vector2 start = new Vector2(clientRect.localScale.x, clientRect.localScale.y);

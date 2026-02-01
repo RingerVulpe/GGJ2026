@@ -5,7 +5,7 @@ public interface IAudioManager
     void StopMusic();
 
     void PlayClick();
-
+    void PlayBookWoosh();
     void PlayClientArrive();
     void PlayClientLeave();
 

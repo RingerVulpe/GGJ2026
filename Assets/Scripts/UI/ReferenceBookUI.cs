@@ -124,6 +124,10 @@ public class ReferenceBookUI : MonoBehaviour
             return;
 
         _leftPageIndex = Mathf.Clamp(_leftPageIndex + 2, 0, GetMaxLeftIndex());
+
+        // SFX: book woosh
+        TryPlayBookWoosh();
+
         Refresh();
     }
 
@@ -133,6 +137,10 @@ public class ReferenceBookUI : MonoBehaviour
             return;
 
         _leftPageIndex = Mathf.Clamp(_leftPageIndex - 2, 0, GetMaxLeftIndex());
+
+        // SFX: book woosh
+        TryPlayBookWoosh();
+
         Refresh();
     }
 
@@ -208,6 +216,27 @@ public class ReferenceBookUI : MonoBehaviour
     private int GetMaxLeftIndex()
     {
         return Mathf.Max(0, _pages.Count - 1);
+    }
+
+    #endregion
+
+    #region Audio Helpers
+
+    private void TryPlayBookWoosh()
+    {
+        IAudioManager audio = null;
+
+        try
+        {
+            audio = AudioManager.Instance;
+        }
+        catch
+        {
+            audio = null;
+        }
+
+        if (audio != null)
+            audio.PlayBookWoosh();
     }
 
     #endregion

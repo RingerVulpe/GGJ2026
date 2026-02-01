@@ -101,6 +101,7 @@ public class AudioManager : MonoBehaviour, IAudioManager
     #region SFX (never cut, never faded)
 
     public void PlayClick() => PlaySfx(_library.click);
+    public void PlayBookWoosh() => PlaySfx(_library.bookWoosh);
     public void PlayClientArrive() => PlaySfx(_library.clientArrive);
     public void PlayClientLeave() => PlaySfx(_library.clientLeave);
     public void PlayMaskAppear() => PlaySfx(_library.maskAppear);
@@ -111,8 +112,22 @@ public class AudioManager : MonoBehaviour, IAudioManager
         if (!CanPlay() || clip == null)
             return;
 
+        // Audible but still natural variation
+        const float pitchVariance = 0.10f; // +/- 10%
+        float originalPitch = _sfxSource.pitch;
+
+        _sfxSource.pitch = Random.Range(
+            1f - pitchVariance,
+            1f + pitchVariance
+        );
+
         _sfxSource.PlayOneShot(clip, _config.sfx.volume);
+
+        // Reset immediately so future calls start clean
+        _sfxSource.pitch = originalPitch;
     }
+
+
 
     #endregion
 
