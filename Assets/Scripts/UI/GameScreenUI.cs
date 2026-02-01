@@ -86,8 +86,8 @@ public class GameScreenUI : MonoBehaviour
         ChoosingMask,
         ShowingResponse,
         TransitioningClient,
-        ShowingFinalOutro,  
-        ShowingFinalScore,   
+        ShowingFinalOutro,
+        ShowingFinalScore,
     }
 
     private FlowState _flowState = FlowState.WaitingToStart;
@@ -138,8 +138,6 @@ public class GameScreenUI : MonoBehaviour
             _clientSession.sessionCompleteWithSummary += OnSessionCompleteWithSummary;
         }
 
-
-
         RefreshFlowUI();
     }
 
@@ -151,6 +149,17 @@ public class GameScreenUI : MonoBehaviour
             _clientSession.sessionComplete -= OnSessionComplete;
             _clientSession.sessionCompleteWithSummary -= OnSessionCompleteWithSummary;
         }
+    }
+
+    #endregion
+
+    #region Public SFX Hooks (for menu/textbox buttons)
+
+    // Hook these in the inspector for your menu button / textbox button if you want.
+    public void PlayUiClickSfx()
+    {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
     }
 
     #endregion
@@ -235,6 +244,9 @@ public class GameScreenUI : MonoBehaviour
             return;
         }
 
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayMaskAppear();
+
         Log($"[GameScreenUI] Mask clicked: {(mask != null ? mask.name : "NULL")} | rect: {(clickedRect != null ? clickedRect.name : "NULL")}");
 
         _selectedMask = mask;
@@ -269,6 +281,9 @@ public class GameScreenUI : MonoBehaviour
 
     private void OnConfirmPressed()
     {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
+
         if (_isConfirmProcessing)
             return;
 
@@ -285,6 +300,10 @@ public class GameScreenUI : MonoBehaviour
 
         if (_confirmButton != null)
             _confirmButton.interactable = false;
+
+        // Mask given SFX occurs on confirm
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayMaskGive();
 
         MaskDefinitionSO chosenMask = _selectedMask;
 
@@ -311,6 +330,9 @@ public class GameScreenUI : MonoBehaviour
 
     private void OnNextPressed()
     {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
+
         if (_clientSession == null)
             return;
 

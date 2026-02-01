@@ -24,16 +24,25 @@ public class MainMenuUI : MonoBehaviour
 
     public void Play()
     {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
+
         ServiceLocator.Get<IGameManager>().StartGame();
     }
 
     public void Credits()
     {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
+
         ServiceLocator.Get<IGameManager>().OpenCredits();
     }
 
     public void Exit()
     {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
+
         ServiceLocator.Get<IGameManager>().ExitGame();
     }
 

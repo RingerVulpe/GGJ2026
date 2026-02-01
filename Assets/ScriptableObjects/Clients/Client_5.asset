@@ -49,3 +49,8 @@ MonoBehaviour:
     on for too long, eh dearie? Looks like the festival is in full swing and I was
     your last one. Enjoy yourself dearie. Make some beautiful memories and soon you''ll
     have as many stories as me! Heheh!'
+  requestVo: {fileID: 8300000, guid: 4f4d028119ed84f478d9aca7002985aa, type: 3}
+  responseIncorrectVo: {fileID: 8300000, guid: 64fabd90ee3b36e49910cb6b9e1fcf92, type: 3}
+  responsePartialVo: {fileID: 8300000, guid: 75e762c51064e3c499363f963bfdf120, type: 3}
+  responseCorrectVo: {fileID: 8300000, guid: a6d6aea9c0d6e68478b351006b922339, type: 3}
+  exitVo: {fileID: 8300000, guid: af461c2cc602d2542a18a05a37706fb3, type: 3}

@@ -44,3 +44,8 @@ MonoBehaviour:
     Oh,
     guess I better get going before I miss the festival. I don''t want to keep your
     line waiting, looks like you still have a couple more to go. Good luck Faceilitator!'
+  requestVo: {fileID: 8300000, guid: 55b79417302e2c14490057c3a17d93ab, type: 3}
+  responseIncorrectVo: {fileID: 8300000, guid: f3f26564db3bd8b4b97da244ca73b540, type: 3}
+  responsePartialVo: {fileID: 8300000, guid: a5e384a61cdfee14b9b262ccebb23005, type: 3}
+  responseCorrectVo: {fileID: 8300000, guid: 01b5137e3ec33c34bba6a8d1357bd8d3, type: 3}
+  exitVo: {fileID: 8300000, guid: 61a980abc24288645843c24a4c9e9544, type: 3}

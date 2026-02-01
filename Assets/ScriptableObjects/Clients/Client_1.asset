@@ -47,3 +47,8 @@ MonoBehaviour:
     You''ve got quite a line building outside, but hang
     in there! I''m sure so long as you get familiar with your Book of Faces you''ll
     find the perfect fit for everyone. Good luck!'
+  requestVo: {fileID: 8300000, guid: 102aa84fe696fd045abea7a28b66eb76, type: 3}
+  responseIncorrectVo: {fileID: 8300000, guid: b92d987894903fb4abea66b4a449200b, type: 3}
+  responsePartialVo: {fileID: 8300000, guid: ac3c244779ed9aa4481dc8c7bcb3e439, type: 3}
+  responseCorrectVo: {fileID: 8300000, guid: b5199d0ddca80394f8a9daa627b1501c, type: 3}
+  exitVo: {fileID: 8300000, guid: 56b75cc1c830a2145a073af94b138737, type: 3}

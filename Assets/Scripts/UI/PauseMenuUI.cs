@@ -48,11 +48,17 @@ public class PauseMenuUI : MonoBehaviour
 
     public void Resume()
     {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
+
         SetPaused(false);
     }
 
     public void ReturnToMainMenu()
     {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
+
         SetPaused(false);
         ServiceLocator.Get<IGameManager>().ReturnToMainMenu();
     }
@@ -63,6 +69,10 @@ public class PauseMenuUI : MonoBehaviour
 
     private void TogglePause()
     {
+        // Optional: click sound when toggling with ESC as well
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
+
         SetPaused(!_isPaused);
     }
 
@@ -95,9 +105,12 @@ public class PauseMenuUI : MonoBehaviour
             _pauseMenuRoot.SetActive(isVisible);
     }
 
-    //exit game 
+    // exit game
     public void ExitGame()
     {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClick();
+
         ServiceLocator.Get<IGameManager>().ExitGame();
     }
 

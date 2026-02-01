@@ -33,20 +33,42 @@ public class GameManager : MonoBehaviour, IGameManager
     public void Initialize()
     {
         Debug.Log("GameManager -> Initialize()");
+
+        // Assume we start on the title scene
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayTitleMusic();
     }
 
     public void StartGame()
     {
+        // Stop menu music, start game music
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.PlayGameMusic();
+        }
+
         LoadScene(GameSceneIndex);
     }
 
     public void ReturnToMainMenu()
     {
+        // Stop game music, return to title music
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.PlayTitleMusic();
+        }
+
         LoadScene(TitleSceneIndex);
     }
 
     public void OpenCredits()
     {
+        // Optional: stop all music for credits
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.StopMusic();
+
         LoadScene(CreditsSceneIndex);
     }
 

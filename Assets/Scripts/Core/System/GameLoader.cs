@@ -11,6 +11,7 @@ public class GameLoader : AsyncLoader
     [SerializeField] private List<Component> GameModules = new List<Component>();
     private static GameLoader _instance = null;
     private static int _sceneIndex = 1;
+    [SerializeField] private AudioManagerConfigSO _audioConfig;
 
     public static Transform SystemsParent { get => _systemsParent; }
     private static Transform _systemsParent = null;
@@ -78,9 +79,42 @@ public class GameLoader : AsyncLoader
         gameManager.Initialize();
         Debug.Log("GameManager Initialized and Registered");
 
+        // Instantiate and register AudioManager
+        var audioManagerGO = new GameObject("AudioManager");
+        audioManagerGO.transform.SetParent(systemsParent);
+        DontDestroyOnLoad(audioManagerGO);
+
+        var audioLibrary = FindFirstObjectByType<AudioLibrary>();
+        if (audioLibrary == null)
+        {
+            Debug.LogError("[GameLoader] AudioLibrary not found in GameLoader scene.");
+        }
+        else
+        {
+            var audioManager = audioManagerGO.AddComponent<AudioManager>();
+            ServiceLocator.Register<IAudioManager>(audioManager);
+            audioManager.Initialize(
+                _audioConfig != null ? Convert(_audioConfig) : new AudioManagerConfig(),
+                audioLibrary
+            );
+
+            Debug.Log("AudioManager Initialized and Registered");
+        }
+
+        Debug.Log("AudioManager Initialized and Registered");
+
+
         yield return null;
     }
-
+    private AudioManagerConfig Convert(AudioManagerConfigSO so)
+    {
+        return new AudioManagerConfig
+        {
+            music = so.music,
+            sfx = so.sfx,
+            vo = so.vo
+        };
+    }
     private IEnumerator InitializeModularSystems(Transform systemsParent)
     {
         // Setup Additional Systems as needed

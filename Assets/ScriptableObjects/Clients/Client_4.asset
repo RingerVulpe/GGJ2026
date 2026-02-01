@@ -50,3 +50,8 @@ MonoBehaviour:
     stage! She calls for me! Hear her song! The show must go on, and so too does
     your lineup! Hark, here comes your final performance! Adieu, my dahling Facelitator!
     ADIEU!'
+  requestVo: {fileID: 8300000, guid: 2776c5949d75fdc418292401859c3f76, type: 3}
+  responseIncorrectVo: {fileID: 8300000, guid: d566d1329b56d674bbf7ddacfba147d1, type: 3}
+  responsePartialVo: {fileID: 8300000, guid: e1a07e02c08021d459a9dc8e18b3d1ce, type: 3}
+  responseCorrectVo: {fileID: 8300000, guid: 49e688cd6518bcf4b8d2b7a1c96a0cd8, type: 3}
+  exitVo: {fileID: 8300000, guid: 369dbc6b714b74248859702da7e06ca4, type: 3}

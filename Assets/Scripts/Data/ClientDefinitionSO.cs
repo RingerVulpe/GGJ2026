@@ -38,4 +38,20 @@ public class ClientDefinitionSO : ScriptableObject
     [TextArea(2, 4)] public string responseIncorrect;
     [TextArea(2, 4)] public string responsePartial;
     [TextArea(2, 4)] public string responseCorrect;
+
+    [Header("VO (Audio Lines)")]
+    [Tooltip("Played when the client arrives / request is shown.")]
+    public AudioClip requestVo;
+
+    [Tooltip("Played when responseIncorrect is used.")]
+    public AudioClip responseIncorrectVo;
+
+    [Tooltip("Played when responsePartial is used.")]
+    public AudioClip responsePartialVo;
+
+    [Tooltip("Played when responseCorrect is used.")]
+    public AudioClip responseCorrectVo;
+
+    [Tooltip("Played when the client leaves.")]
+    public AudioClip exitVo;
 }

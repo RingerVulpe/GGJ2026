@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameLoader
   sceneIndexToLoad: 1
   GameModules: []
+  _audioConfig: {fileID: 11400000, guid: 52732a2052b91db43bca186c1cd9d00d, type: 2}
 --- !u!4 &1581091757
 Transform:
   m_ObjectHideFlags: 0
@@ -165,8 +166,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1911881951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1911881953}
+  - component: {fileID: 1911881952}
+  m_Layer: 0
+  m_Name: AudioLibrary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1911881952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911881951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085cc4f9f894f9e4ba4a39ca9a7ee964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioLibrary
+  titleMusic: {fileID: 8300000, guid: 52794ab74e2cef647830a7b53285b3f1, type: 3}
+  gameMusic: {fileID: 8300000, guid: 52794ab74e2cef647830a7b53285b3f1, type: 3}
+  click: {fileID: 8300000, guid: 4fe1b6ac52eef37428811e5592b54131, type: 3}
+  clientArrive: {fileID: 8300000, guid: 10063c6b57d034d42b3fd0fe231d4f44, type: 3}
+  clientLeave: {fileID: 8300000, guid: 4b1002295a0497944b2965bfa48fb61a, type: 3}
+  maskAppear: {fileID: 8300000, guid: 8665c7439f7c92443ad9301ccd50d2d3, type: 3}
+  maskGive: {fileID: 8300000, guid: 6c1db0931d2c1f0448736796d324f603, type: 3}
+--- !u!4 &1911881953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911881951}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1271.5657, y: 988.654, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1581091757}
+  - {fileID: 1911881953}

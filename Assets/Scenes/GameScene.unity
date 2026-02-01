@@ -4427,7 +4427,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 52b702c3c86805f489ae4455cee32402, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91597053b46ea134c92aa150685dd293, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5526,7 +5526,7 @@ MonoBehaviour:
     now.'
   _scoreOutcomes:
   - minScore: 15
-    title: Excellent
+    title: 
     body: "As you exit your humble station and enter the crowds of the Festival,
       you are immediately taken with awe at the palpable sense of joy and warmth
       that surround you. \n\nEverywhere you look are a myriad of unique and colourful
@@ -5536,7 +5536,7 @@ MonoBehaviour:
       be one to remember. You don your own Face, and are washed away in the revelry
       of the Festival.\n"
   - minScore: 10
-    title: Good
+    title: 
     body: "Another year closes, and your first as a Faceilitator. Considering all
       the rules you had to quickly master, you feel you did quite well! \n\nAs you
       join the festivities, you observe the intricate Faces that form the crowd,
@@ -5545,16 +5545,16 @@ MonoBehaviour:
       will be proud to wear for the rest of the year.\n\nCongratulations! Enjoy a
       job well done! \n"
   - minScore: 0
-    title: Good
+    title: 
     body: "They weren't kidding, being a Facilitator isn't easy!\n\nDespite the challenge,
       you still see many beautiful Faces making up the crowds in the festival, although
       it's not uncommon to see some misunderstandings when some are quick to judge
       other by their Face. \n\nOh well, you can only improve, and there is always
       next year!\n"
   _scoreScreenTitle: Your Results
-  _scoreScreenBodyFormat: 'Final score: {score}
+  _scoreScreenBodyFormat: 'Final score: {score}/15
 
-    Clients served: {clients}'
+    Clients served: {clients}/5'
   _log: 0
 --- !u!114 &1804786591
 MonoBehaviour:
@@ -6916,9 +6916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Confirm
-
-'
+  m_text: Bestow
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

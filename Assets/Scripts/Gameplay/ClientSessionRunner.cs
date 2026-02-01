@@ -57,7 +57,7 @@ public class ClientSessionRunner : MonoBehaviour
     [Tooltip("Optional: time bonus if you answer quickly. 0 disables.")]
     [SerializeField] private int _maxTimeBonus = 2;
 
-    [Tooltip("If a client is solved at or under this time, you get the max bonus.")]
+    [Tooltip("This outcome is used if final score >= minScore.")]
     [SerializeField] private float _timeBonusTargetSeconds = 8f;
 
     [Tooltip("At/above this time, time bonus becomes 0 (linear falloff).")]
@@ -139,7 +139,6 @@ public class ClientSessionRunner : MonoBehaviour
         DespawnCurrentClient();
     }
 
-
     public void BeginCurrentClient()
     {
         if (isComplete)
@@ -161,6 +160,15 @@ public class ClientSessionRunner : MonoBehaviour
         {
             _isClientInPosition = true;
             _clientStartTime = Time.time; // timer starts when client arrives
+
+            // SFX: arrive whoosh
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayClientArrive();
+
+            // VO: request line
+            var c = GetCurrentClient();
+            if (c != null && AudioManager.Instance != null)
+                AudioManager.Instance.PlayClientRequest(c.requestVo);
         });
 
         clientShown?.Invoke(GetCurrentClient());
@@ -191,12 +199,23 @@ public class ClientSessionRunner : MonoBehaviour
 
         // Score + time accounting
         float clientTime = Mathf.Max(0f, Time.time - _clientStartTime);
-        //int scoreAdd = ComputeScoreDelta(matchCount, clientTime);
-
         _finalScore += matchCount;
         _clientsServed++;
 
-       
+        if (AudioManager.Instance != null)
+        {
+            AudioClip responseClip = null;
+
+            if (matchCount <= 0)
+                responseClip = client.responseIncorrectVo;
+            else if (matchCount == 1)
+                responseClip = client.responsePartialVo;
+            else
+                responseClip = client.responseCorrectVo;
+
+            AudioManager.Instance.PlayClientResponse(responseClip);
+        }
+
         clientResponded?.Invoke(response, matchCount);
 
         // Wait here until UI triggers ProceedToNextClient().
@@ -205,13 +224,20 @@ public class ClientSessionRunner : MonoBehaviour
         return response;
     }
 
-
     public void ProceedToNextClient()
     {
         if (!_isWaitingForProceed)
             return;
 
         _isWaitingForProceed = false;
+
+        // VO: exit line + SFX leave whoosh (triggered when leaving starts)
+        var client = GetCurrentClient();
+        if (client != null && AudioManager.Instance != null)
+            AudioManager.Instance.PlayClientExit(client.exitVo);
+
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayClientLeave();
 
         // Slide out current client, then advance and bring the next one in.
         if (_currentClientView != null)
@@ -231,8 +257,6 @@ public class ClientSessionRunner : MonoBehaviour
     #endregion
 
     #region Private Methods
-
-
 
     private void AdvanceAndBeginNextClient()
     {
