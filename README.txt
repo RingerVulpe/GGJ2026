@@ -10,49 +10,63 @@
         / \
 
 
-GGJ 2026 – How This Project Is Set Up
+GGJ 2026 – Project Setup Overview
 
-This is not a reusable framework.
-This is not production-quality architecture.
-This README exists because it was required.
+This is a Global Game Jam project.
 
-No, I am not detailing every single step or inspector field. I have more important things to do than write a Unity tutorial for a game jam project.
+It is not a reusable framework.
 
-If you know Unity, this should be enough to understand how the project is wired.
-If you don’t… honestly, I’m not sure why you’re here.
+The goal of this file is to explain how the project is wired together,
+not to teach Unity or justify design decisions made under time pressure.
+
+If you are comfortable with Unity, this should be enough to orient you.
+If you are not, this project is probably not a great learning reference.
 
 
-Scenes
+------------------------------------------------------------
+SCENES
+------------------------------------------------------------
 
-There are four scenes. Yes, four.
+There are four scenes.
 
 GameLoader
-An empty bootstrap scene with GameLoader on it. It exists so the game has a clean entry point. That’s it.
+An intentionally minimal bootstrap scene containing GameLoader.
+
+Its only responsibility is initializing persistent systems
+(GameManager, AudioManager, etc.) before loading anything else.
+Nothing interactive happens here.
 
 Title
-Main menu scene. Contains the menu UI controller that talks to GameManager. Pressing Play loads the game scene.
+The main menu scene.
+
+Contains the menu UI controller, which communicates with GameManager.
+Pressing Play transitions into the Game scene.
 
 Game
-This is the main scene and where everything happens.
+The main gameplay scene.
 
-There is a GameObject here that holds the core gameplay components:
+This scene must contain a GameObject holding the following core components:
 - ClientSessionRunner
 - GameScreenUI
 - ReferenceBookUI
 - MaskSelectionTravelFX
 - PauseMenuUI
 
-All of these need to be present and correctly hooked up. If something is missing, the game will not work.
+All references must be correctly assigned.
+If something is missing or unassigned, the game will not function.
 
-This assumes you already know how to create UI objects, buttons, images, and TextMeshPro fields.
+This setup assumes you already know how to create UI objects,
+buttons, images, and TextMeshPro fields.
 
 Credits
-Credits scene. Reached at the end of the game.
+The final scene, reached after the end-of-game flow completes.
 
 
-Data (ScriptableObjects)
+------------------------------------------------------------
+DATA (SCRIPTABLEOBJECTS)
+------------------------------------------------------------
 
-The game is driven by ScriptableObjects.
+The game is primarily data-driven via ScriptableObjects.
 
 You are expected to create:
 - Clients
@@ -65,18 +79,22 @@ You are expected to create:
 
 Each client is a ClientDefinitionSO.
 Each mask is a MaskDefinitionSO.
+
 The client queue defines the order clients appear.
-The mask library defines which masks are available.
+The mask library defines which masks are available to the player.
 
-Yes, this is a lot of setup.
-No, this README is not walking you through creating every asset. Deal with it.
+------------------------------------------------------------
+CLIENT SESSION RUNNER
+------------------------------------------------------------
 
+ClientSessionRunner controls the overall flow of the game.
 
-Client Session Runner
-
-ClientSessionRunner controls the overall flow of clients.
-
-It pulls from the client queue, spawns client prefabs, slides them in and out, handles timing, and handles scoring.
+It:
+- Pulls clients from the client queue
+- Spawns client prefabs
+- Slides clients in and out of view
+- Tracks timing
+- Handles scoring and progression
 
 It requires:
 - A ClientQueueSO
@@ -84,20 +102,30 @@ It requires:
 - RectTransforms for start, center, and exit positions
 - A parent transform for spawned clients
 
-There are a lot of exposed motion and tuning values in the inspector. They exist so things could be tuned quickly during the jam. They are not individually documented.
+Many tuning values are exposed in the inspector.
+They exist to allow rapid iteration during the jam
+and are not individually documented.
 
 
-Game Screen UI
+------------------------------------------------------------
+GAME SCREEN UI
+------------------------------------------------------------
 
-GameScreenUI is the main UI controller during gameplay.
+GameScreenUI is the primary gameplay UI controller.
 
-It displays request text, player feedback, handles confirm and next buttons, receives mask selections, and transitions to the score screen and credits.
+It:
+- Displays client request text
+- Displays player feedback
+- Handles confirm and next buttons
+- Receives mask selections
+- Manages final outcome and score presentation
+- Transitions to the credits scene
 
-It needs references to:
+It requires references to:
 - MaskLibrary
 - ClientSessionRunner
 - MaskGridUI
-- Various TMP text fields
+- Multiple TextMeshPro text fields
 - Buttons
 - The selected mask image
 - MaskSelectionTravelFX
@@ -105,57 +133,134 @@ It needs references to:
 All UI elements are expected to already exist in the scene.
 
 
-Mask Grid and Mask Slots
+------------------------------------------------------------
+MASK GRID AND MASK SLOTS
+------------------------------------------------------------
 
-There is a grid container with MaskGridUI on it.
-Each individual mask slot has MaskSlotUI.
+The mask selection UI is split into two parts.
 
-The grid handles creating slots, populating them with data, and tracking selection.
-Each slot displays a mask icon, handles clicks, and reports selection back to the grid.
+MaskGridUI
+Attached to the grid container.
 
-Yes, the grid has a script and every slot has a script.
-This is intentional.
+It:
+- Creates mask slots
+- Populates them with data
+- Tracks selection state
 
+MaskSlotUI
+Attached to each individual slot.
 
-Mask Selection Travel FX
-
-MaskSelectionTravelFX is visual-only.
-
-It handles the mask flying from the grid to the selected slot, including ghosting, arcs, scale pop, and landing wobble.
-
-It needs a reference to the main Canvas and a RectTransform for the selected mask display.
-
-There are a lot of exposed values because the animation was tuned visually.
-No, they are not all explained.
-
-
-Reference Book UI
-
-ReferenceBookUI handles the in-game reference book.
-
-It displays two pages of text, handles page navigation, and shows hover hints and arrows.
-Only two text fields exist. Page content is swapped in and out.
+Each slot:
+- Displays a mask icon
+- Handles click input
+- Reports selection back to the grid
 
 
-Pause Menu
+------------------------------------------------------------
+MASK SELECTION TRAVEL FX
+------------------------------------------------------------
 
-PauseMenuUI shows and hides the pause menu and optionally pauses time.
-Nothing fancy.
+MaskSelectionTravelFX is purely visual.
+
+It handles the mask traveling from the grid
+to the selected slot, including:
+- Ghosting
+- Arcing motion
+- Scale pop
+- Landing wobble
+
+It requires:
+- A reference to the main Canvas
+- A RectTransform for the selected mask display
+
+Many values are exposed because the animation
+was tuned visually during development.
+They are not individually explained.
 
 
-Final Notes
+------------------------------------------------------------
+REFERENCE BOOK UI
+------------------------------------------------------------
 
-This project assumes you know how to use Unity.
+ReferenceBookUI controls the in-game reference book.
+
+It:
+- Displays two pages of text
+- Handles page navigation
+- Shows hover hints and navigation arrows
+
+Only two text fields exist.
+Page content is swapped dynamically as pages change.
+
+
+------------------------------------------------------------
+PAUSE MENU
+------------------------------------------------------------
+
+PauseMenuUI handles showing and hiding the pause menu.
+
+It can optionally pause time by adjusting Time.timeScale.
+Nothing complicated is happening here.
+
+
+------------------------------------------------------------
+AUDIO SYSTEM
+------------------------------------------------------------
+
+Audio is handled by AudioManager and AudioLibrary.
+
+AudioManager is created in the GameLoader scene
+and registered through the ServiceLocator.
+It persists across scene loads (same as GameManager).
+
+AudioLibrary is a MonoBehaviour placed in the GameLoader scene.
+It contains references to all audio clips used by the game.
+
+Audio is split into three channels:
+- Music
+- SFX
+- VO (voice-over)
+
+Each channel has:
+- Independent volume
+- Priority
+- Fade-in and fade-out timing
+
+Hard audio cuts are intentionally avoided.
+
+Music behavior:
+- Title music plays in the Title scene
+- Game music replaces title music when entering the Game scene
+- Music stops when entering the Credits scene
+
+SFX behavior:
+- UI clicks
+- Client arrival and departure
+- Mask selection and confirmation
+SFX are layered using PlayOneShot and are never interrupted.
+
+VO behavior:
+- Each client can have:
+  - One request VO
+  - One response VO (fail / partial / success)
+  - One exit VO
+- Only one VO plays at a time
+- New VO replaces existing VO via fades,
+  never via hard stops
+
+
+------------------------------------------------------------
+FINAL NOTES
+------------------------------------------------------------
+
+This project assumes a working knowledge of Unity.
 
 It does not explain:
-- How to make UI
+- How to create UI
 - How to create ScriptableObjects
-- How to assign references
-- What every inspector slider does
+- How to assign inspector references
+- What every exposed tuning value does
 
-The game was built to ship during a jam.
-It does that.
+Anything beyond that is intentionally out of scope.
 
-Anything beyond that is outside the scope of this README.
-
-Now wobble away from my stuff.
+Please approach it with the appropriate expectations.
